@@ -3,6 +3,8 @@ import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import SendHash from "./contracts/SendHash.json";
 import getWeb3 from "./getWeb3";
 import ipfs from "./ipfs";
+import { Button } from 'reactstrap';
+
 
 import "./App.css";
 
@@ -102,8 +104,8 @@ class App extends Component {
         />
         <h2>Upload Image</h2>
         <form onSubmit={this.onSubmit}>
-          <input type="file" onChange={this.captureFile} />
-          <input type="submit" />
+          <Button color="primary"><input type="file" onChange={this.captureFile} />Choose File</Button>
+          <Button color="success">Uploade !</Button>
         </form>
         {<div>The Hash is: {this.state.ipfsHash}</div>}
       </div>
