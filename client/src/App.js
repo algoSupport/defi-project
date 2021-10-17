@@ -90,6 +90,7 @@ class App extends Component {
     });
   }
 
+
   render() {
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
@@ -103,9 +104,14 @@ class App extends Component {
           alt=""
         />
         <h2>Upload Image</h2>
-        <form onSubmit={this.onSubmit}>
-          <Button color="primary"><input type="file" onChange={this.captureFile} />Choose File</Button>
-          <Button color="success">Uploade !</Button>
+        <form onSubmit={this.onSubmit} onChange={this.captureFile}>
+      <div>
+        <p><Button color="primary">
+        <label>
+          <input type="file" multiple onChange={this.onChange} />Choose File 
+        </label></Button></p>
+        </div>
+          <Button color="success">Upload</Button>
         </form>
         {<div>The Hash is: {this.state.ipfsHash}</div>}
       </div>

@@ -20,3 +20,16 @@
 .App-link {
   color: #09d3ac;
 }
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.file-preview {
+margin: 0 10px;
+}
