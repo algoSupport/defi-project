@@ -90,7 +90,6 @@ class App extends Component {
     });
   }
 
-
   render() {
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
@@ -99,21 +98,24 @@ class App extends Component {
       <div className="App">
         <h1>Your Image</h1>
         <p>This image is store on IPFS & Ethereum blockhain!</p>
-        <img
-          src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`}
-          alt=""
-        />
+        {/* <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt="" /> */}
         <h2>Upload Image</h2>
-        <form onSubmit={this.onSubmit} onChange={this.captureFile}>
-      <div>
-        <p><Button color="primary">
-        <label>
-          <input type="file" multiple onChange={this.onChange} />Choose File 
-        </label></Button></p>
+        <div className="container">
+          <form onSubmit={this.onSubmit} className="form">
+            {/* <div className="file-uploade-wrapper" data-text="Select your file">
+              <input
+                type="file"
+                onChange={this.captureFile}
+              />
+              <input type="submit" />
+            </div> */}
+            <label className="file">
+              <Button style={{border: '1px solid #494949', borderRadius: '5px 0px 0px 5px', backgroundColor: '#F7F7F7'}}><input type="file" id="file" aria-label="File browser example" onChange={this.captureFile} /></Button>
+              <Button color="primary" style={{borderRadius: '0px 5px 5px 0px'}} ><input type="submit" />Upload</Button>
+            </label>
+          </form>
+          {<div>The Hash is: {this.state.ipfsHash}</div>}
         </div>
-          <Button color="success">Upload</Button>
-        </form>
-        {<div>The Hash is: {this.state.ipfsHash}</div>}
       </div>
     );
   }
