@@ -55,7 +55,7 @@ class App extends Component {
     const { accounts, contract } = this.state;
     console.log(document.getElementById('cert-id').value);
     // Stores a given value, 5 by default.
-    await contract.methods.generateCertificate(document.getElementById('cert-id').value,document.getElementById('name').value,document.getElementById('org-name').value,document.getElementById('course-name').value,(this.state.ipfsHash)).send({ from: accounts[0], gas:3000000 });
+    await contract.methods.generateCertificate(document.getElementById('cert-id').value, document.getElementById('name').value, document.getElementById('org-name').value, document.getElementById('course-name').value, (this.state.ipfsHash)).send({ from: accounts[0], gas: 3000000 });
 
     // Get the value from the contract to prove it worked.
     const response = await contract.methods.getHash().call();
@@ -99,20 +99,35 @@ class App extends Component {
         <p>This image is store on IPFS & Ethereum blockhain!</p>
         <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt="" />
         <h2>Upload Image</h2>
-        <div className="container">
-          <form onSubmit={this.onSubmit} className="form">
-            <div className="input-field">
-            <input id="cert-id" placeholder="ID" />
-            <input id="name" placeholder="Receipient Name" />
-            <input id="org-name" placeholder="Organization"/>
-            <input id="course-name" placeholder="Course Name"/>
-            <label className="file">
-              <Button style={{border: '1px solid #494949', borderRadius: '5px 0px 0px 5px', backgroundColor: '#F7F7F7'}}><input type="file" id="file" aria-label="File browser example" onChange={this.captureFile} /></Button>
-              <Button color="primary" style={{borderRadius: '0px 5px 5px 0px'}} ><input type="submit" />Upload</Button>
-            </label>
-            </div>
-          </form>
-          {<div>The Hash is: {this.state.ipfsHash}</div>}
+        <div className="login-wrap">
+          <div className="container login-html">
+            <form onSubmit={this.onSubmit} className="form">
+              <div className="input-field">
+                <div className="login-form">
+                  <div className="group">
+                    <label htmlFor="user" className="label">ID</label>
+                    <input id="cert-id" placeholder="ID" className="input" />
+                    <label htmlFor="user" className="label">Receipient Name</label>
+                    <input id="name" placeholder="Receipient Name" className="input" />
+                    <label htmlFor="user" className="label">Organization</label>
+                    <input id="org-name" placeholder="Organization" className="input" />
+                    <label htmlFor="user" className="label">Course name</label>
+                    <input id="course-name" placeholder="Course Name" className="input" />
+                    <label htmlFor="user" className="label">Upload</label>
+
+                    
+
+                    <label className="file">
+                      <Button style={{ border: '1px solid #494949', borderRadius: '5px 0px 0px 5px', backgroundColor: '#F7F7F7' }}><input type="file" id="file" aria-label="File browser example" onChange={this.captureFile} /></Button>
+                      <input type="submit" class="button" value="Upload" />
+
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+            {<div>The Hash is: {this.state.ipfsHash}</div>}
+          </div>
         </div>
       </div>
     );

@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-#cert-id, #name, #org-name, #course-name{
+/* #cert-id, #name, #org-name, #course-name{
   display: block;
   position: relative;
   margin: 20px auto;
@@ -22,7 +22,7 @@ code {
   padding: 5px;
   border: 1px solid #474747;
   text-indent: 8px;
-}
+} */
 
 input:focus {
   border-color: rgb(123, 218, 210);
