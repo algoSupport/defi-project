@@ -1,5 +1,5 @@
-var SendHash = artifacts.require("./SendHash.sol");
+var Certification = artifacts.require("./Certification.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(SendHash);
+  deployer.deploy(Certification);
 };

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import SendHash from "./contracts/SendHash.json";
+import Certification from "./contracts/Certification.json";
 import getWeb3 from "./getWeb3";
 import ipfs from "./ipfs";
 import { Button } from 'reactstrap';
@@ -34,9 +33,9 @@ class App extends Component {
       console.log(accounts);
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SendHash.networks[networkId];
+      const deployedNetwork = Certification.networks[networkId];
       const instance = new web3.eth.Contract(
-        SendHash.abi,
+        Certification.abi,
         deployedNetwork && deployedNetwork.address
       );
 
@@ -54,9 +53,9 @@ class App extends Component {
 
   sendHash = async () => {
     const { accounts, contract } = this.state;
-
+    console.log(document.getElementById('cert-id').value);
     // Stores a given value, 5 by default.
-    await contract.methods.sendHash(this.state.ipfsHash).send({ from: accounts[0] });
+    await contract.methods.generateCertificate(document.getElementById('cert-id').value,document.getElementById('name').value,document.getElementById('org-name').value,document.getElementById('course-name').value,(this.state.ipfsHash)).send({ from: accounts[0], gas:3000000 });
 
     // Get the value from the contract to prove it worked.
     const response = await contract.methods.getHash().call();
@@ -98,21 +97,20 @@ class App extends Component {
       <div className="App">
         <h1>Your Image</h1>
         <p>This image is store on IPFS & Ethereum blockhain!</p>
-        {/* <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt="" /> */}
+        <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt="" />
         <h2>Upload Image</h2>
         <div className="container">
           <form onSubmit={this.onSubmit} className="form">
-            {/* <div className="file-uploade-wrapper" data-text="Select your file">
-              <input
-                type="file"
-                onChange={this.captureFile}
-              />
-              <input type="submit" />
-            </div> */}
+            <div className="input-field">
+            <input id="cert-id" placeholder="ID" />
+            <input id="name" placeholder="Receipient Name" />
+            <input id="org-name" placeholder="Organization"/>
+            <input id="course-name" placeholder="Course Name"/>
             <label className="file">
               <Button style={{border: '1px solid #494949', borderRadius: '5px 0px 0px 5px', backgroundColor: '#F7F7F7'}}><input type="file" id="file" aria-label="File browser example" onChange={this.captureFile} /></Button>
               <Button color="primary" style={{borderRadius: '0px 5px 5px 0px'}} ><input type="submit" />Upload</Button>
             </label>
+            </div>
           </form>
           {<div>The Hash is: {this.state.ipfsHash}</div>}
         </div>
