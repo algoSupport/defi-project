@@ -21,9 +21,6 @@
   color: #09d3ac;
 }
 
-.file-preview {
-margin: 0 10px;
-}
 body{
 	margin:0;
 	color:#6a6f8c;
@@ -35,20 +32,28 @@ body{
 .clearfix:after{clear:both;display:block}
 a{color:inherit;text-decoration:none}
 
+img {
+	max-width: 100%;
+	height: 500px
+}
+
+.input { 
+	margin-bottom: 30px
+}
 .login-wrap{
 	width:100%;
 	margin:auto;
 	max-width:525px;
-	min-height:670px;
+	min-height:750px;
 	position:relative;
-	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
 .login-html{
 	width:100%;
 	height:100%;
 	position:absolute;
-	padding:90px 70px 50px 70px;
+	padding:50px 70px 50px 70px;
 	background:rgba(40,57,101,.9);
 }
 .login-html .sign-in-htm,
@@ -70,6 +75,7 @@ a{color:inherit;text-decoration:none}
 .login-html .tab,
 .login-form .group .label,
 .login-form .group .button{
+	margin-top: 10px;
 	text-transform:uppercase;
 }
 .login-html .tab{
@@ -108,10 +114,7 @@ a{color:inherit;text-decoration:none}
 	border-radius:25px;
 	background:rgba(255,255,255,.1);
 }
-.login-form .group input[data-type="password"]{
-	text-security:circle;
-	-webkit-text-security:circle;
-}
+
 .login-form .group .label{
 	color:#aaa;
 	font-size:12px;
@@ -146,24 +149,6 @@ a{color:inherit;text-decoration:none}
 	top:6px;
 	right:0;
 	transform:scale(0) rotate(0);
-}
-.login-form .group .check:checked + label{
-	color:#fff;
-}
-.login-form .group .check:checked + label .icon{
-	background:#1161ee;
-}
-.login-form .group .check:checked + label .icon:before{
-	transform:scale(1) rotate(45deg);
-}
-.login-form .group .check:checked + label .icon:after{
-	transform:scale(1) rotate(-45deg);
-}
-.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
-	transform:rotate(0);
-}
-.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
-	transform:rotate(0);
 }
 
 .hr{

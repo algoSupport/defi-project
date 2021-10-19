@@ -102,32 +102,63 @@ class App extends Component {
         <div className="login-wrap">
           <div className="container login-html">
             <form onSubmit={this.onSubmit} className="form">
-              <div className="input-field">
                 <div className="login-form">
                   <div className="group">
-                    <label htmlFor="user" className="label">ID</label>
+                    <label htmlFor="user" className="label">
+                      ID
+                    </label>
                     <input id="cert-id" placeholder="ID" className="input" />
-                    <label htmlFor="user" className="label">Receipient Name</label>
-                    <input id="name" placeholder="Receipient Name" className="input" />
-                    <label htmlFor="user" className="label">Organization</label>
-                    <input id="org-name" placeholder="Organization" className="input" />
-                    <label htmlFor="user" className="label">Course name</label>
-                    <input id="course-name" placeholder="Course Name" className="input" />
-                    <label htmlFor="user" className="label">Upload</label>
-
-                    
+                    <label htmlFor="user" className="label">
+                      Receipient Name
+                    </label>
+                    <input
+                      id="name"
+                      placeholder="Receipient Name"
+                      className="input"
+                    />
+                    <label htmlFor="user" className="label">
+                      Organization
+                    </label>
+                    <input
+                      id="org-name"
+                      placeholder="Organization"
+                      className="input"
+                    />
+                    <label htmlFor="user" className="label">
+                      Course name
+                    </label>
+                    <input
+                      id="course-name"
+                      placeholder="Course Name"
+                      className="input"
+                    />
+                    <label htmlFor="user" className="label">
+                      Upload
+                    </label>
 
                     <label className="file">
-                      <Button style={{ border: '1px solid #494949', borderRadius: '5px 0px 0px 5px', backgroundColor: '#F7F7F7' }}><input type="file" id="file" aria-label="File browser example" onChange={this.captureFile} /></Button>
-                      <input type="submit" class="button" value="Upload" />
-
+                      <Button
+                        style={{
+                          border: "1px solid #494949",
+                          borderRadius: "50px",
+                          backgroundColor: "#F7F7F7",
+                        }}
+                      >
+                        <input
+                          type="file"
+                          id="file"
+                          aria-label="File browser example"
+                          onChange={this.captureFile}
+                        />
+                      </Button>
+                      <input type="submit" class="button" value="Upload & Submit" />
                     </label>
                   </div>
                 </div>
-              </div>
             </form>
-            {<div>The Hash is: {this.state.ipfsHash}</div>}
           </div>
+          {<div style={{position: 'absolute', bottom: '25px', left: '20px', color: 'white'}} >Hash is: {this.state.ipfsHash}</div>}
+
         </div>
       </div>
     );
