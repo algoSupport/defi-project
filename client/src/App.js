@@ -8,20 +8,6 @@ import { Button } from 'reactstrap';
 import "./App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.captureFile = this.captureFile.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-  state = {
-    web3: null,
-    accounts: null,
-    contract: null,
-    buffer: null,
-    ipfsHash: "",
-    imageStatus: "loading"
-  };
 
   componentDidMount = async () => {
     try {
@@ -50,41 +36,6 @@ class App extends Component {
       console.error(error);
     }
   };
-
-  sendHash = async () => {
-    const { accounts, contract } = this.state;
-    console.log(document.getElementById('cert-id').value);
-    await contract.methods.generateCertificate(document.getElementById('cert-id').value, document.getElementById('name').value, document.getElementById('org-name').value, document.getElementById('course-name').value, (this.state.ipfsHash)).send({ from: accounts[0], gas: 3000000 });
-    const response = await contract.methods.getHash().call();
-    console.log(response)
-    // Update state with the result.
-    this.setState({ ipfsHash: response });
-  };
-
-  captureFile(e) {
-    e.preventDefault();
-    const file = e.target.files[0];
-    const reader = new window.FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onloadend = () => {
-      this.setState({ buffer: Buffer(reader.result) });
-      console.log("buffer", this.state.buffer);
-    };
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-    console.log("onSubmit...");
-    ipfs.files.add(this.state.buffer, (err, result) => {
-      if (err) {
-        console.error("error");
-        return;
-      }
-      this.setState({ ipfsHash: result[0].hash });
-      console.log("ipfsHash", this.state.ipfsHash);
-      this.sendHash()
-    });
-  }
 
   render() {
     if (!this.state.web3) {
