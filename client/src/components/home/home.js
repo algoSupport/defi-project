@@ -52,10 +52,9 @@ class Home extends Component {
   sendHash = async () => {
     const { accounts, contract } = this.state
     console.log(document.getElementById('cert-id').value)
-    // Stores a given value, 5 by default.
-    await contract.methods
-      .generateCertificate(
-        document.getElementById('cert-id').value,
+    const id = await contract.methods.generateId(document.getElementById('cert-id').value).call()
+    await contract.methods.generateCertificate(
+        id,
         document.getElementById('name').value,
         document.getElementById('org-name').value,
         document.getElementById('course-name').value,
@@ -63,8 +62,8 @@ class Home extends Component {
       )
       .send({ from: accounts[0], gas: 3000000 })
 
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.getHash().call()
+
+    const response = await contract.methods.getHash(document.getElementById('cert-id').value).call()
     console.log(response)
     // Update state with the result.
     this.setState({ ipfsHash: response })
@@ -101,59 +100,59 @@ class Home extends Component {
     }
     return (
       <div>
-        <section class="et-hero-tabs">
+        <section className="et-hero-tabs">
           <h1>Certification System</h1>
           <h3>Using Etherum Blockchain</h3>
 
-          <div class="et-hero-tabs-container">
-            <a class="et-hero-tab" href="#tab-university">
+          <div className="et-hero-tabs-container">
+            <a className="et-hero-tab" href="#tab-university">
               University
             </a>
-            <a class="et-hero-tab" href="#tab-student">
+            <a className="et-hero-tab" href="#tab-student">
               Student
             </a>
-            <a class="et-hero-tab" href="#tab-enterprise">
+            <a className="et-hero-tab" href="#tab-enterprise">
               Enterprise
             </a>
-            <span class="et-hero-tab-slider"></span>
+            <span className="et-hero-tab-slider"></span>
           </div>
         </section>
 
-        <main class="et-main">
-        <form onSubmit={this.onSubmit} >
+        <main className="et-main">
+
           <section className="et-slider" id="tab-university">
-            <div class="row">
+            <div className="row">
               <div>
                 <h1>University</h1>
                 <h3> Upload a Certificate</h3>
               </div>
-              <div class="container">
+              <div className="container">
                 <h2>Upload Data</h2>
-                <form class="form" action="#">
-                  <fieldset class="form-fieldset ui-input __first">
-                    <input type="text" id="cert-id" tabindex="0" />
-                    <label for="username">
+                <form onSubmit={this.onSubmit} className="form">
+                  <fieldset className="form-fieldset ui-input __first">
+                    <input type="email" id="cert-id" tabIndex="0" />
+                    <label htmlFor="username">
                       <span data-text="E-mail Address">E-mail Address</span>
                     </label>
                   </fieldset>
 
-                  <fieldset class="form-fieldset ui-input __second">
-                    <input type="email" id="name" tabindex="0" />
-                    <label for="email">
+                  <fieldset className="form-fieldset ui-input __second">
+                    <input type="text" id="name" tabIndex="0" />
+                    <label htmlFor="email">
                       <span data-text="Name">Name</span>
                     </label>
                   </fieldset>
 
-                  <fieldset class="form-fieldset ui-input __third">
+                  <fieldset className="form-fieldset ui-input __third">
                     <input type="text"  id="org-name" />
-                    <label for="new-password">
+                    <label htmlFor="new-password">
                       <span data-text="Organization">Organization</span>
                     </label>
                   </fieldset>
 
-                  <fieldset class="form-fieldset ui-input __fourth">
+                  <fieldset className="form-fieldset ui-input __fourth">
                     <input type="text"  id="course-name" />
-                    <label for="repeat-new-password">
+                    <label htmlFor="repeat-new-password">
                       <span data-text="Courses">Courses</span>
                     </label>
                   </fieldset>
@@ -173,21 +172,21 @@ class Home extends Component {
                           onChange={this.captureFile}
                         />
                       </Button>
-                      <input type="submit" class="button" value="Upload & Submit" />
+                      <input type="submit" className="button" value="Upload & Submit" />
                     </label>
-                  <div class="form-footer">
+                  <div className="form-footer">
                     <button className="btn">Upload</button>
                   </div>
                 </form>
               </div>
             </div>
           </section>
-          </form>
 
-          <section class="et-slide" id="tab-student">
+
+          <section className="et-slide" id="tab-student">
             <h1>Student</h1>
           </section>
-          <section class="et-slide" id="tab-enterprise">
+          <section className="et-slide" id="tab-enterprise">
             <h1>Enterprise</h1>
           </section>
         </main>

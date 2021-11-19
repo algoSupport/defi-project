@@ -54,10 +54,7 @@ class App extends Component {
   sendHash = async () => {
     const { accounts, contract } = this.state;
     console.log(document.getElementById('cert-id').value);
-    // Stores a given value, 5 by default.
     await contract.methods.generateCertificate(document.getElementById('cert-id').value, document.getElementById('name').value, document.getElementById('org-name').value, document.getElementById('course-name').value, (this.state.ipfsHash)).send({ from: accounts[0], gas: 3000000 });
-
-    // Get the value from the contract to prove it worked.
     const response = await contract.methods.getHash().call();
     console.log(response)
     // Update state with the result.
