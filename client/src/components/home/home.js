@@ -52,9 +52,8 @@ class Home extends Component {
   sendHash = async () => {
     const { accounts, contract } = this.state
     console.log(document.getElementById('cert-id').value)
-    const id = await contract.methods.generateId(document.getElementById('cert-id').value).call()
     await contract.methods.generateCertificate(
-        id,
+        document.getElementById('cert-id').value,
         document.getElementById('name').value,
         document.getElementById('org-name').value,
         document.getElementById('course-name').value,
@@ -92,6 +91,14 @@ class Home extends Component {
       console.log('ipfsHash', this.state.ipfsHash)
       this.sendHash()
     })
+  }
+
+  onSubmitStudent = async (e) => {
+    const { contract } = this.state
+    e.preventDefault()
+    const ipfs_hash = await contract.methods.getHash(document.getElementById('student-email').value).call()
+    console.log(ipfs_hash)
+    return ipfs_hash
   }
 
   render() {
@@ -185,6 +192,17 @@ class Home extends Component {
 
           <section className="et-slide" id="tab-student">
             <h1>Student</h1>
+            <form onSubmit={this.onSubmitStudent} className="form">
+                  <fieldset className="form-fieldset ui-input __first">
+                    <input type="text" id="student-email" tabIndex="0" />
+                    <label htmlFor="student-email">
+                      <span data-text="E-mail Address">E-mail Address</span>
+                    </label>
+                  </fieldset>
+                  <div className="form-footer">
+                    <button className="btn">Upload</button>
+                  </div>
+            </form>
           </section>
           <section className="et-slide" id="tab-enterprise">
             <h1>Enterprise</h1>
