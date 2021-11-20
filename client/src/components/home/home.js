@@ -172,7 +172,7 @@ class Home extends Component {
                           onChange={this.captureFile}
                         />
                       </Button>
-                      <input type="submit" className="button" value="Upload & Submit" />
+                      <input type="submit" className="btn-u" value="Upload & Submit" />
                     </label>
                   <div className="form-footer">
                     <button className="btn">Upload</button>
