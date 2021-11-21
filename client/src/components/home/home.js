@@ -198,7 +198,14 @@ class Home extends Component {
                     />
                   </label>
                   <div className="form-footer">
-                    <button className="btn">Upload</button>
+                    <div id="container" className="pt-14">
+                      <button className="log-in">
+                        <span className="circle" aria-hidden="true">
+                          <span className="icon arrow"></span>
+                        </span>
+                        <span className="button-text">Upload</span>
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -221,14 +228,6 @@ class Home extends Component {
           </section>
           <section className="et-slide-company" id="tab-company">
             <h1>Company</h1>
-            <div id="container">
-              <button class="learn-more">
-                <span class="circle" aria-hidden="true">
-                  <span class="icon arrow"></span>
-                </span>
-                <span class="button-text">Learn More</span>
-              </button>
-            </div>
           </section>
         </main>
       </div>
