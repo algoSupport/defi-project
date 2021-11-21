@@ -5,6 +5,7 @@ import ipfs from '../../ipfs'
 import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
+import '../styles/button.scss'
 class Home extends Component {
   constructor(props) {
     super(props)
@@ -52,7 +53,8 @@ class Home extends Component {
   sendHash = async () => {
     const { accounts, contract } = this.state
     console.log(document.getElementById('cert-id').value)
-    await contract.methods.generateCertificate(
+    await contract.methods
+      .generateCertificate(
         document.getElementById('cert-id').value,
         document.getElementById('name').value,
         document.getElementById('org-name').value,
@@ -61,8 +63,9 @@ class Home extends Component {
       )
       .send({ from: accounts[0], gas: 3000000 })
 
-
-    const response = await contract.methods.getHash(document.getElementById('cert-id').value).call()
+    const response = await contract.methods
+      .getHash(document.getElementById('cert-id').value)
+      .call()
     console.log(response)
     // Update state with the result.
     this.setState({ ipfsHash: response })
@@ -96,7 +99,9 @@ class Home extends Component {
   onSubmitStudent = async (e) => {
     const { contract } = this.state
     e.preventDefault()
-    const ipfs_hash = await contract.methods.getHash(document.getElementById('student-email').value).call()
+    const ipfs_hash = await contract.methods
+      .getHash(document.getElementById('student-email').value)
+      .call()
     console.log(ipfs_hash)
     return ipfs_hash
   }
@@ -110,23 +115,30 @@ class Home extends Component {
         <section className="et-hero-tabs">
           <h1>Certification System</h1>
           <h3>Using Etherum Blockchain</h3>
+          <div id="container" className="pt-4">
+            <button class="log-in">
+              <span class="circle" aria-hidden="true">
+                <span class="icon arrow"></span>
+              </span>
+              <span class="button-text">Log-In</span>
+            </button>
+          </div>
 
           <div className="et-hero-tabs-container">
-            <a className="et-hero-tab" href="#tab-university">
+            <a className="et-hero-tab-u" href="#tab-university">
               University
             </a>
             <a className="et-hero-tab" href="#tab-student">
               Student
             </a>
-            <a className="et-hero-tab" href="#tab-enterprise">
-              Enterprise
+            <a className="et-hero-tab" href="#tab-company">
+              Company
             </a>
             <span className="et-hero-tab-slider"></span>
           </div>
         </section>
 
         <main className="et-main">
-
           <section className="et-slider" id="tab-university">
             <div className="row">
               <div>
@@ -151,36 +163,40 @@ class Home extends Component {
                   </fieldset>
 
                   <fieldset className="form-fieldset ui-input __third">
-                    <input type="text"  id="org-name" />
+                    <input type="text" id="org-name" />
                     <label htmlFor="new-password">
                       <span data-text="Organization">Organization</span>
                     </label>
                   </fieldset>
 
                   <fieldset className="form-fieldset ui-input __fourth">
-                    <input type="text"  id="course-name" />
+                    <input type="text" id="course-name" />
                     <label htmlFor="repeat-new-password">
                       <span data-text="Courses">Courses</span>
                     </label>
                   </fieldset>
 
                   <label className="file">
-                      <Button
-                        style={{
-                          border: "1px solid #494949",
-                          borderRadius: "50px",
-                          backgroundColor: "#F7F7F7",
-                        }}
-                      >
-                        <input
-                          type="file"
-                          id="file"
-                          aria-label="File browser example"
-                          onChange={this.captureFile}
-                        />
-                      </Button>
-                      <input type="submit" className="btn-u" value="Upload & Submit" />
-                    </label>
+                    <Button
+                      style={{
+                        border: '1px solid #494949',
+                        borderRadius: '50px',
+                        backgroundColor: '#F7F7F7',
+                      }}
+                    >
+                      <input
+                        type="file"
+                        id="file"
+                        aria-label="File browser example"
+                        onChange={this.captureFile}
+                      />
+                    </Button>
+                    <input
+                      type="submit"
+                      className="btn-u"
+                      value="Upload & Submit"
+                    />
+                  </label>
                   <div className="form-footer">
                     <button className="btn">Upload</button>
                   </div>
@@ -189,28 +205,33 @@ class Home extends Component {
             </div>
           </section>
 
-
-          <section className="et-slide" id="tab-student">
+          <section className="et-slide-student" id="tab-student">
             <h1>Student</h1>
             <form onSubmit={this.onSubmitStudent} className="form">
-                  <fieldset className="form-fieldset ui-input __first">
-                    <input type="text" id="student-email" tabIndex="0" />
-                    <label htmlFor="student-email">
-                      <span data-text="E-mail Address">E-mail Address</span>
-                    </label>
-                  </fieldset>
-                  <div className="form-footer">
-                    <button className="btn">Upload</button>
-                  </div>
+              <fieldset className="form-fieldset ui-input __first">
+                <input type="text" id="student-email" tabIndex="0" />
+                <label htmlFor="student-email">
+                  <span data-text="E-mail Address">E-mail Address</span>
+                </label>
+              </fieldset>
+              <div className="form-footer">
+                <button className="btn">Upload</button>
+              </div>
             </form>
           </section>
-          <section className="et-slide" id="tab-enterprise">
-            <h1>Enterprise</h1>
+          <section className="et-slide-company" id="tab-company">
+            <h1>Company</h1>
+            <div id="container">
+              <button class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </button>
+            </div>
           </section>
         </main>
-       
       </div>
-     
     )
   }
 }
