@@ -2,17 +2,19 @@ import React, { Component } from 'react'
 import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
-import Web3 from "web3";
 import { Button } from 'reactstrap'
+import { BsFillFileCheckFill } from "react-icon/bs";
 import '../styles/home.scss'
 import '../styles/form.scss'
 import '../styles/button.scss'
+
 class Home extends Component {
   constructor(props) {
     super(props)
 
     this.captureFile = this.captureFile.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.state = { showMessage: false }
   }
   state = {
     web3: null,
@@ -20,7 +22,7 @@ class Home extends Component {
     contract: null,
     buffer: null,
     ipfsHash: '',
-    imageStatus: 'loading',
+    imageStatus: false,
   }
 
   componentDidMount = async () => {
@@ -106,9 +108,18 @@ class Home extends Component {
     const cert_id = await contract.methods
       .getId(document.getElementById('student-email').value)
       .call()
+    this.setState({ ipfsHash: ipfs_hash })
     console.log(ipfs_hash)
     console.log(cert_id)
-    return (ipfs_hash, cert_id)
+    return null
+  }
+
+  _showMessage = (bool) => {
+    const { ipfs_hash } = this.state
+    this.setState({
+      showMessage: bool,
+      ipfs_hash: ipfs_hash
+    });
   }
 
   onSubmitCompany = async (e) => {
@@ -241,6 +252,8 @@ class Home extends Component {
                 <button className="btn">Submit</button>
               </div>
             </form>
+            <Button onClick={this._showMessage.bind(null, true)} >Show Image</Button>
+            { this.state.showMessage && (<div><a href={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} target="_blank"><img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt="" /></a></div>) }
           </section>
           <section className="et-slide-company" id="tab-company">
             <h1>Company</h1>
@@ -253,6 +266,7 @@ class Home extends Component {
               </fieldset>
               <div className="form-footer">
                 <button className="btn">Submit</button>
+                <BsFillFileCheckFill/>
               </div>
             </form>
           </section>
