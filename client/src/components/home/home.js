@@ -6,6 +6,11 @@ import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
 import '../styles/button.scss'
+
+
+
+// or less ideally
+
 class Home extends Component {
   constructor(props) {
     super(props)
@@ -106,6 +111,11 @@ class Home extends Component {
     return ipfs_hash
   }
 
+  fill(e) {
+    e.removeClass('border-animation')
+    e.addClass('green')
+  }
+
   render() {
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>
@@ -120,9 +130,16 @@ class Home extends Component {
               <span class="circle" aria-hidden="true">
                 <span class="icon arrow"></span>
               </span>
-              <span class="button-text">Log-In</span>
+              <span
+                data-toggle="modal"
+                data-target="#modalRegisterForm"
+                className="button-text"
+              >
+                Log-In
+              </span>
             </button>
           </div>
+         
 
           <div className="et-hero-tabs-container">
             <a className="et-hero-tab-u" href="#tab-university">
@@ -143,7 +160,7 @@ class Home extends Component {
             <div className="row">
               <div>
                 <h1>University</h1>
-                <h3> Upload a Certificate</h3>
+                <h3>Upload a Certificate</h3>
               </div>
               <div className="container">
                 <h2>Upload Data</h2>
@@ -222,12 +239,26 @@ class Home extends Component {
                 </label>
               </fieldset>
               <div className="form-footer">
-                <button className="btn">Upload</button>
+              <div id="container" className="pt-14">
+                      <button className="log-in">
+                        <span className="circle" aria-hidden="true">
+                          <span className="icon arrow"></span>
+                        </span>
+                        <span className="button-form">Upload</span>
+                      </button>
+                    </div>
               </div>
             </form>
           </section>
           <section className="et-slide-company" id="tab-company">
             <h1>Company</h1>
+            <div class="contact-form-container">
+              <form>
+                <div class="submit-btn border-animation" onClick="fill(this)">
+                  <input type="submit" value="sss" />
+                </div>
+              </form>
+            </div>
           </section>
         </main>
       </div>
