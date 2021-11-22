@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
+import { FaCheckCircle } from 'react-icons/fa';
 import { Button } from 'reactstrap'
-import { BsFillFileCheckFill } from "react-icon/bs";
 import '../styles/home.scss'
 import '../styles/form.scss'
 import '../styles/button.scss'
@@ -11,7 +11,6 @@ import '../styles/button.scss'
 class Home extends Component {
   constructor(props) {
     super(props)
-
     this.captureFile = this.captureFile.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.state = { showMessage: false }
@@ -266,7 +265,7 @@ class Home extends Component {
               </fieldset>
               <div className="form-footer">
                 <button className="btn">Submit</button>
-                <BsFillFileCheckFill/>
+                <FaCheckCircle />
               </div>
             </form>
           </section>
