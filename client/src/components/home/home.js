@@ -114,11 +114,9 @@ class Home extends Component {
   onSubmitCompany = async (e) => {
     const { contract } = this.state
     e.preventDefault()
-    const inbytes = Web3.utils.asciiToHex(document.getElementById('cert-id').value)
     const verify_result = await contract.methods
-      .isVerified(inbytes)
+      .isVerified(document.getElementById('cert-id').value)
       .call()
-      console.log(inbytes)
     console.log(document.getElementById('cert-id').value)
     console.log(verify_result)
     return verify_result
