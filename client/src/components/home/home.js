@@ -57,10 +57,10 @@ class Home extends Component {
 
   sendHash = async () => {
     const { accounts, contract } = this.state
-    console.log(document.getElementById('cert-id').value)
+    console.log(document.getElementById('email').value)
     await contract.methods
       .generateCertificate(
-        document.getElementById('cert-id').value,
+        document.getElementById('email').value,
         document.getElementById('name').value,
         document.getElementById('org-name').value,
         document.getElementById('course-name').value,
@@ -69,7 +69,7 @@ class Home extends Component {
       .send({ from: accounts[0], gas: 3000000 })
 
     const response = await contract.methods
-      .getHash(document.getElementById('cert-id').value)
+      .getHash(document.getElementById('email').value)
       .call()
     console.log(response)
     // Update state with the result.
@@ -107,8 +107,23 @@ class Home extends Component {
     const ipfs_hash = await contract.methods
       .getHash(document.getElementById('student-email').value)
       .call()
+    const cert_id = await contract.methods
+      .getId(document.getElementById('student-email').value)
+      .call()
     console.log(ipfs_hash)
-    return ipfs_hash
+    console.log(cert_id)
+    return (ipfs_hash, cert_id)
+  }
+
+  onSubmitCompany = async (e) => {
+    const { contract } = this.state
+    e.preventDefault()
+    const verify_result = await contract.methods
+      .isVerified(document.getElementById('cert-id').value)
+      .call()
+    console.log(document.getElementById('cert-id').value)
+    console.log(verify_result)
+    return verify_result
   }
 
   fill(e) {
@@ -166,7 +181,7 @@ class Home extends Component {
                 <h2>Upload Data</h2>
                 <form onSubmit={this.onSubmit} className="form">
                   <fieldset className="form-fieldset ui-input __first">
-                    <input type="email" id="cert-id" tabIndex="0" />
+                    <input type="email" id="email" tabIndex="0" />
                     <label htmlFor="username">
                       <span data-text="E-mail Address">E-mail Address</span>
                     </label>
@@ -174,7 +189,7 @@ class Home extends Component {
 
                   <fieldset className="form-fieldset ui-input __second">
                     <input type="text" id="name" tabIndex="0" />
-                    <label htmlFor="email">
+                    <label htmlFor="name">
                       <span data-text="Name">Name</span>
                     </label>
                   </fieldset>
@@ -252,13 +267,17 @@ class Home extends Component {
           </section>
           <section className="et-slide-company" id="tab-company">
             <h1>Company</h1>
-            <div class="contact-form-container">
-              <form>
-                <div class="submit-btn border-animation" onClick="fill(this)">
-                  <input type="submit" value="sss" />
-                </div>
-              </form>
-            </div>
+            <form onSubmit={this.onSubmitCompany} className="form">
+              <fieldset className="form-fieldset ui-input __first">
+                <input type="text" id="cert-id" tabIndex="0" />
+                <label htmlFor="cert-id">
+                  <span data-text="Certificate ID">Certificate ID</span>
+                </label>
+              </fieldset>
+              <div className="form-footer">
+                <button className="btn">Submit</button>
+              </div>
+            </form>
           </section>
         </main>
       </div>
