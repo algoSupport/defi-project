@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
-import { FaCheckCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaWindowClose } from 'react-icons/fa';
 import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
@@ -13,7 +13,6 @@ class Home extends Component {
     super(props)
     this.captureFile = this.captureFile.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-    this.state = { showMessage: false }
   }
   state = {
     web3: null,
@@ -22,6 +21,8 @@ class Home extends Component {
     buffer: null,
     ipfsHash: '',
     imageStatus: false,
+    showMessage: false,
+    verified: null,
   }
 
   componentDidMount = async () => {
@@ -129,7 +130,8 @@ class Home extends Component {
       .call()
     console.log(document.getElementById('cert-id').value)
     console.log(verify_result)
-    return verify_result
+    this.setState({verified: verify_result})
+    return null
   }
 
   render() {
@@ -265,7 +267,9 @@ class Home extends Component {
               </fieldset>
               <div className="form-footer">
                 <button className="btn">Submit</button>
-                <FaCheckCircle />
+                  
+               <i><showIcon/> </i>
+               
               </div>
             </form>
           </section>
