@@ -264,9 +264,18 @@ class Home extends Component {
                 </div>
               </div>
             </form>
-            <Button onClick={this._showMessage.bind(null, true)}>
-              Show Image
-            </Button>
+            <div id="container" className="pt-14">
+              <button
+                onClick={this._showMessage.bind(null, true)}
+                className="log-in"
+              >
+                <span className="circle" aria-hidden="true">
+                  <span className="icon arrow"></span>
+                </span>
+                <span className="button-text">Show Img</span>
+              </button>
+            </div>
+
             {this.state.showMessage && (
               <div class="portrait landscape square pt-3">
                 <a
@@ -291,7 +300,19 @@ class Home extends Component {
                 </label>
               </fieldset>
               <div className="form-footer">
-                <button  className="btn">Submit</button>
+                <div className="d-flex justify-content-center">
+                  <button type="submit" className="button-submit">
+                    <span>Submit</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23 8.828-8.187 15-11.438-5.861 5.775-10.711 12.328-14 18.917-2.651-3.766-5.547-7.271-10-10.917z" />
+                    </svg>
+                  </button>
+                </div>
                 <FaCheckCircle />
               </div>
             </form>
