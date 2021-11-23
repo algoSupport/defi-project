@@ -3,7 +3,6 @@ import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
 import { FaCheckCircle, FaWindowClose } from 'react-icons/fa';
-import { isVerified } from './isVerified'
 import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
@@ -298,7 +297,6 @@ class Home extends Component {
                 <button  className="btn">Submit</button>
               </div>
             </form>
-            <isVerified />
           </section>
         </main>
       </div>
