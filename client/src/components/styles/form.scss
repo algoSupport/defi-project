@@ -62,8 +62,6 @@ h2 {
   font-size: 24px;
   outline: 0;
   width: 100%;
-  tap-highlight-color: rgba(0,0,0,0);
-  touch-callout: none;
 }
 
 .ui-input input + label {
@@ -116,7 +114,7 @@ h2 {
           rgba(255,255,255,0) 0%);
       background-position: 100% 50%;
       background-size: 200%;
-      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       
       backface-visibility: hidden;
@@ -302,7 +300,7 @@ h2 {
           rgba(255,255,255,0) 0%);
       background-position: 100% 50%;
       background-size: 200%;
-      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       
       backface-visibility: hidden;
@@ -365,13 +363,12 @@ h2 {
           rgba(255,255,255,0) 0%);
       background-position: 100% 50%;
       background-size: 200%;
-      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       
       backface-visibility: hidden;
       perspective: 1000;
       transform: translateZ(0);
-      
       transition: background-position $time $bezier;
     }
   }

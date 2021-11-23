@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
-import { FaCheckCircle } from 'react-icons/fa'
+import { FaCheckCircle, FaWindowClose } from 'react-icons/fa';
 import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
 import '../styles/button.scss'
 import '../styles/submit_btn.scss'
 
-class Home extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props)
     this.captureFile = this.captureFile.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-    this.state = { showMessage: false }
   }
   state = {
     web3: null,
@@ -23,6 +22,8 @@ class Home extends Component {
     buffer: null,
     ipfsHash: '',
     imageStatus: false,
+    showMessage: false,
+    verified: null,
   }
 
   componentDidMount = async () => {
@@ -130,7 +131,13 @@ class Home extends Component {
       .call()
     console.log(document.getElementById('cert-id').value)
     console.log(verify_result)
-    return verify_result
+    this.setState({verified: verify_result})
+  }
+
+  isVerified() {
+    return(<div>
+      <h1>Hello</h1>
+    </div>)
   }
 
   render() {
@@ -143,11 +150,11 @@ class Home extends Component {
           <h1>Certification System</h1>
           <h3>Using Etherum Blockchain</h3>
           <div id="container" className="pt-4">
-            <button class="log-in">
-              <span class="circle" aria-hidden="true">
-                <span class="icon arrow"></span>
+            <button className="log-in">
+              <span className="circle" aria-hidden="true">
+                <span className="icon arrow"></span>
               </span>
-              <span class="button-text">Log-In</span>
+              <span className="button-text">Log-In</span>
             </button>
           </div>
 
@@ -264,18 +271,9 @@ class Home extends Component {
                 </div>
               </div>
             </form>
-            <div id="container" className="pt-14">
-              <button
-                onClick={this._showMessage.bind(null, true)}
-                className="log-in"
-              >
-                <span className="circle" aria-hidden="true">
-                  <span className="icon arrow"></span>
-                </span>
-                <span className="button-text">Show Img</span>
-              </button>
-            </div>
-
+            <Button onClick={this._showMessage.bind(null, true)}>
+              Show Image
+            </Button>
             {this.state.showMessage && (
               <div>
                 <a
@@ -300,8 +298,8 @@ class Home extends Component {
                 </label>
               </fieldset>
               <div className="form-footer">
-                <div className="d-flex justify-content-center">
-                  <button type="submit" className="button-submit">
+                <div className="d-flex justify-content-center pb-3">
+                <button type="submit" className="button-submit">
                     <span>Submit</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -312,15 +310,15 @@ class Home extends Component {
                       <path d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23 8.828-8.187 15-11.438-5.861 5.775-10.711 12.328-14 18.917-2.651-3.766-5.547-7.271-10-10.917z" />
                     </svg>
                   </button>
-                </div>
-                <FaCheckCircle />
+                  </div>
               </div>
             </form>
+            {this.state.verified && (<div><h2>This Certificate ID has already Verified!!</h2></div> ) }
           </section>
         </main>
       </div>
+      
     )
   }
 }
 
-export default Home
