@@ -134,11 +134,6 @@ export default class Home extends Component {
     this.setState({verified: verify_result})
   }
 
-  isVerified() {
-    return(<div>
-      <h1>Hello</h1>
-    </div>)
-  }
 
   render() {
     if (!this.state.web3) {
@@ -275,7 +270,7 @@ export default class Home extends Component {
               Show Image
             </Button>
             {this.state.showMessage && (
-              <div>
+              <div class="pt-3">
                 <a
                   href={`https://ipfs.io/ipfs/${this.state.ipfsHash}`}
                   target="_blank"
