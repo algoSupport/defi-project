@@ -133,8 +133,9 @@ export default class Home extends Component {
       .call()
     console.log(document.getElementById('cert-id').value)
     console.log(verify_result)
-    this.setState({verified: verify_result, showVerified: true})
+    this.setState({verified: verify_result})
   }
+
 
   render() {
     if (!this.state.web3) {
@@ -272,7 +273,7 @@ export default class Home extends Component {
               Show Image
             </Button>
             {this.state.showMessage && (
-              <div>
+              <div class="pt-3">
                 <a
                   href={`https://ipfs.io/ipfs/${this.state.ipfsHash}`}
                   target="_blank"
