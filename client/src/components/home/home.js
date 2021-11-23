@@ -133,9 +133,8 @@ export default class Home extends Component {
       .call()
     console.log(document.getElementById('cert-id').value)
     console.log(verify_result)
-    this.setState({verified: verify_result})
+    this.setState({verified: verify_result, showVerified: true})
   }
-
 
   render() {
     if (!this.state.web3) {
@@ -273,7 +272,7 @@ export default class Home extends Component {
               Show Image
             </Button>
             {this.state.showMessage && (
-              <div class="pt-3">
+              <div>
                 <a
                   href={`https://ipfs.io/ipfs/${this.state.ipfsHash}`}
                   target="_blank"
@@ -311,7 +310,7 @@ export default class Home extends Component {
                   </div>
               </div>
             </form>
-            {this.state.showVerified && (<div><h2>This Certificate ID has</h2> {this.state.verified ? (<div><h2>Already Verified</h2><i className="fa" ><FaAdn /></i></div>):(<div><h2>Not Verify</h2><i><FaAdn /></i></div>)}</div> ) }
+            {this.state.showVerified && (<div><h2>This Certificate ID has</h2> {this.state.verified ? (<div><h2>Already Verified<img className="icon" src="./images/check.png"  alt="verified-icon" /></h2></div>):(<div><h2>Not Verify<img className="icon" src="./images/cross.png"  alt="unverified-icon" /></h2></div>)}</div> ) }
           </section>
         </main>
       </div>
