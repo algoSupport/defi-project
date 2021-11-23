@@ -9,7 +9,7 @@ import '../styles/form.scss'
 import '../styles/button.scss'
 import '../styles/submit_btn.scss'
 
-class Home extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props)
     this.captureFile = this.captureFile.bind(this)
@@ -132,7 +132,12 @@ class Home extends Component {
     console.log(document.getElementById('cert-id').value)
     console.log(verify_result)
     this.setState({verified: verify_result})
-    return null
+  }
+
+  isVerified() {
+    return(<div>
+      <h1>Hello</h1>
+    </div>)
   }
 
   render() {
@@ -144,7 +149,6 @@ class Home extends Component {
         <section className="et-hero-tabs">
           <h1>Certification System</h1>
           <h3>Using Etherum Blockchain</h3>
-          <isVerified />
           <div id="container" className="pt-4">
             <button className="log-in">
               <span className="circle" aria-hidden="true">
@@ -294,14 +298,27 @@ class Home extends Component {
                 </label>
               </fieldset>
               <div className="form-footer">
-                <button  className="btn">Submit</button>
+                <div className="d-flex justify-content-center pb-3">
+                <button type="submit" className="button-submit">
+                    <span>Submit</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23 8.828-8.187 15-11.438-5.861 5.775-10.711 12.328-14 18.917-2.651-3.766-5.547-7.271-10-10.917z" />
+                    </svg>
+                  </button>
+                  </div>
               </div>
             </form>
+            {this.state.verified && (<div><h2>This Certificate ID has already Verified!!</h2></div> ) }
           </section>
         </main>
       </div>
+      
     )
   }
 }
 
-export default Home
