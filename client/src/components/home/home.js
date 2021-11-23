@@ -277,7 +277,7 @@ class Home extends Component {
             </div>
 
             {this.state.showMessage && (
-              <div class="portrait landscape square pt-3">
+              <div>
                 <a
                   href={`https://ipfs.io/ipfs/${this.state.ipfsHash}`}
                   target="_blank"
