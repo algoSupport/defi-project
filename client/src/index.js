@@ -8,7 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(
+    <React.StrictMode>
+    <Home />, 
+    </React.StrictMode>,
+    document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
-<<<<<<< HEAD
 import { FaCheckCircle, FaWindowClose } from 'react-icons/fa';
-=======
-import { FaCheckCircle } from 'react-icons/fa'
->>>>>>> b8aaedff6f7a6784411e50f23f88418c90d9ecbb
+import { isVerified } from './isVerified'
 import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
@@ -148,12 +145,13 @@ class Home extends Component {
         <section className="et-hero-tabs">
           <h1>Certification System</h1>
           <h3>Using Etherum Blockchain</h3>
+          <isVerified />
           <div id="container" className="pt-4">
-            <button class="log-in">
-              <span class="circle" aria-hidden="true">
-                <span class="icon arrow"></span>
+            <button className="log-in">
+              <span className="circle" aria-hidden="true">
+                <span className="icon arrow"></span>
               </span>
-              <span class="button-text">Log-In</span>
+              <span className="button-text">Log-In</span>
             </button>
           </div>
 
@@ -297,17 +295,10 @@ class Home extends Component {
                 </label>
               </fieldset>
               <div className="form-footer">
-<<<<<<< HEAD
-                <button className="btn">Submit</button>
-                  
-               <i><showIcon/> </i>
-               
-=======
                 <button  className="btn">Submit</button>
-                <FaCheckCircle />
->>>>>>> b8aaedff6f7a6784411e50f23f88418c90d9ecbb
               </div>
             </form>
+            <isVerified />
           </section>
         </main>
       </div>
