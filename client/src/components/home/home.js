@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
-import { FaCheckCircle, FaWindowClose } from 'react-icons/fa';
+import { FaBeer } from 'react-icons/fa';
 import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
@@ -24,6 +24,7 @@ export default class Home extends Component {
     imageStatus: false,
     showMessage: false,
     verified: null,
+    showVerified: false
   }
 
   componentDidMount = async () => {
@@ -124,6 +125,7 @@ export default class Home extends Component {
   }
 
   onSubmitCompany = async (e) => {
+    this.forceUpdate();
     const { contract } = this.state
     e.preventDefault()
     const verify_result = await contract.methods
@@ -131,13 +133,7 @@ export default class Home extends Component {
       .call()
     console.log(document.getElementById('cert-id').value)
     console.log(verify_result)
-    this.setState({verified: verify_result})
-  }
-
-  isVerified() {
-    return(<div>
-      <h1>Hello</h1>
-    </div>)
+    this.setState({verified: verify_result, showVerified: true})
   }
 
   render() {
@@ -313,7 +309,7 @@ export default class Home extends Component {
                   </div>
               </div>
             </form>
-            {this.state.verified && (<div><h2>This Certificate ID has already Verified!!</h2></div> ) }
+            {this.state.showVerified && (<div>This Certificate ID has {this.state.verified ? (<h2>Already Verified<i><FaBeer /></i></h2> ):(<h2>Not Verify<i><FaBeer /></i></h2>)}</div> ) }
           </section>
         </main>
       </div>
