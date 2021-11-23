@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Certification from '../../../src/contracts/Certification.json'
 import getWeb3 from '../../getWeb3'
 import ipfs from '../../ipfs'
-import { FaBeer } from 'react-icons/fa';
+import { FaAdn } from 'react-icons/fa';
 import { Button } from 'reactstrap'
 import '../styles/home.scss'
 import '../styles/form.scss'
@@ -142,6 +142,7 @@ export default class Home extends Component {
     }
     return (
       <div>
+                  <i className="fa" ><FaAdn /></i>
         <section className="et-hero-tabs">
           <h1>Certification System</h1>
           <h3>Using Etherum Blockchain</h3>
@@ -309,7 +310,7 @@ export default class Home extends Component {
                   </div>
               </div>
             </form>
-            {this.state.showVerified && (<div>This Certificate ID has {this.state.verified ? (<h2>Already Verified<i><FaBeer /></i></h2> ):(<h2>Not Verify<i><FaBeer /></i></h2>)}</div> ) }
+            {this.state.showVerified && (<div><h2>This Certificate ID has</h2> {this.state.verified ? (<div><h2>Already Verified</h2><i className="fa" ><FaAdn /></i></div>):(<div><h2>Not Verify</h2><i><FaAdn /></i></div>)}</div> ) }
           </section>
         </main>
       </div>
